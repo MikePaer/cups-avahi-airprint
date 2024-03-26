@@ -13,7 +13,6 @@ RUN echo -e "https://dl-cdn.alpinelinux.org/alpine/edge/testing\nhttps://dl-cdn.
 	gutenprint-doc \
 	gutenprint-cups \
 	ghostscript \
-	brlaser \
 	hplip \
 	avahi \
 	inotify-tools \
@@ -24,6 +23,21 @@ RUN echo -e "https://dl-cdn.alpinelinux.org/alpine/edge/testing\nhttps://dl-cdn.
 	rsync \
  	py3-pycups \
 	&& rm -rf /var/cache/apk/*
+
+# Install brlaser from source
+RUN echo -e "https://dl-cdn.alpinelinux.org/alpine/edge/testing\nhttps://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories &&\
+	apk add --no-cache --update \
+	build-base \
+	cmake \
+	autoconf \
+	automake \
+ 	git \
+	&& rm -rf /var/cache/apk/*
+RUN git clone https://github.com/pdewacht/brlaser.git \
+	&& cd brlaser/ \
+	&& cmake ../ \
+	&& make \
+	&& make install 
 
 # This will use port 631
 EXPOSE 631
