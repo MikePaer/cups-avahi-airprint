@@ -3,13 +3,18 @@ version: '3.5'
 services:
   cups:
     container_name: cups
-    #image: chuckcharlie/cups-avahi-airprint
+    # image: chuckcharlie/cups-avahi-airprint
     build: .
     restart: always
     network_mode: "host"
+    privileged: true
+    devices:
+      - /dev/bus:/dev/bus
+      - /dev/usb:/dev/usb
     environment:
       CUPSADMIN: cups
       CUPSPASSWORD: cups
     volumes:
       - "./services:/services"
       - "./config:/config"
+      - "/run/dbus:/run/dbus"
