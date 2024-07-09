@@ -29,6 +29,8 @@ RUN echo -e "https://dl-cdn.alpinelinux.org/alpine/edge/testing\nhttps://dl-cdn.
 	automake \
  	git \
 	&& rm -rf /var/cache/apk/*
+ 
+RUN apk upgrade -a
 
 # Install brlaser from source
 RUN git clone https://github.com/pdewacht/brlaser.git \
