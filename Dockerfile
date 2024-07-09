@@ -33,6 +33,7 @@ RUN echo -e "https://dl-cdn.alpinelinux.org/alpine/edge/testing\nhttps://dl-cdn.
 	automake \
  	git \
 	&& rm -rf /var/cache/apk/*
+ 
 RUN git clone https://github.com/pdewacht/brlaser.git \
 	&& cd brlaser/ \
 	&& cmake . \
